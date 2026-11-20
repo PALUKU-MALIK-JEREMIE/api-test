@@ -5,9 +5,7 @@ API REST en PHP (sans framework) pour gérer des étudiants, des membres de fami
 ## Installation
 
 1. Placer le projet dans `C:\xampp\htdocs\api-test` et démarrer Apache et MySQL depuis XAMPP.
-2. Créer une base de données `api`, puis importer, dans cet ordre :
-   - `api.sql` (table `tbl_etudiant`)
-   - `famille_account.sql` (tables `famille_membre` et `account`)
+2. Créer une base de données `api` vide, puis y importer `api.sql` (phpMyAdmin > Importer, ou `mysql -u root api < api.sql`). Ce fichier crée les trois tables : `tbl_etudiant`, `famille_membre` et `account`.
 3. Copier `.env.example` en `.env` et adapter les identifiants si besoin :
 
    ```env
@@ -17,8 +15,6 @@ API REST en PHP (sans framework) pour gérer des étudiants, des membres de fami
    DB_USERNAME=root
    DB_PASSWORD=
    ```
-
-> Avec MariaDB, l'import de `api.sql` peut échouer avec `Unknown collation: 'utf8mb4_0900_ai_ci'`. Remplacer cette collation par `utf8mb4_unicode_ci` dans le fichier avant de l'importer.
 
 ## URL de base
 
@@ -263,6 +259,5 @@ api-test/
 │   ├── Controllers/           # Un contrôleur par ressource
 │   └── Models/                # Un modèle par table
 ├── config/database.php
-├── api.sql                    # Table tbl_etudiant
-└── famille_account.sql        # Tables famille_membre et account
+└── api.sql                    # Toutes les tables (à importer une seule fois)
 ```
