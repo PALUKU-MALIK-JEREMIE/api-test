@@ -2,9 +2,16 @@
 
 require_once __DIR__ . '/../src/Database.php';
 require_once __DIR__ . '/../src/Models/Etudiant.php';
+require_once __DIR__ . '/../src/Models/FamilleMembre.php';
+require_once __DIR__ . '/../src/Models/Account.php';
+require_once __DIR__ . '/../src/Controllers/Controller.php';
 require_once __DIR__ . '/../src/Controllers/EtudiantController.php';
+require_once __DIR__ . '/../src/Controllers/FamilleMembreController.php';
+require_once __DIR__ . '/../src/Controllers/AccountController.php';
 
+use App\Controllers\AccountController;
 use App\Controllers\EtudiantController;
+use App\Controllers\FamilleMembreController;
 
 header('Content-Type: application/json; charset=utf-8');
 header('Access-Control-Allow-Origin: *');
@@ -41,9 +48,9 @@ if ($path === '/') {
     $path = '';
 }
 
-$controller = new EtudiantController();
-
+// ---------- Étudiants ----------
 if (preg_match('#^/etudiants$#', $path)) {
+    $controller = new EtudiantController();
     match ($method) {
         'GET' => $controller->index(),
         'POST' => $controller->store(),
@@ -53,6 +60,7 @@ if (preg_match('#^/etudiants$#', $path)) {
 }
 
 if (preg_match('#^/etudiants/(\d+)$#', $path, $matches)) {
+    $controller = new EtudiantController();
     $id = (int) $matches[1];
     match ($method) {
         'GET' => $controller->show($id),
@@ -60,6 +68,41 @@ if (preg_match('#^/etudiants/(\d+)$#', $path, $matches)) {
         'DELETE' => $controller->destroy($id),
         default => methodNotAllowed(),
     };
+    exit;
+}
+
+// ---------- Membres de famille ----------
+if (preg_match('#^/famille-membres$#', $path)) {
+    $controller = new FamilleMembreController();
+    match ($method) {
+        'GET' => $controller->index(),
+        'POST' => $controller->store(),
+        default => methodNotAllowed(),
+    };
+    exit;
+}
+
+if (preg_match('#^/famille-membres/(\d+)$#', $path, $matches)) {
+    $controller = new FamilleMembreController();
+    $id = (int) $matches[1];
+    match ($method) {
+        'GET' => $controller->show($id),
+        // POST sert à la mise à jour en form-data (PHP ne lit pas les fichiers envoyés en PUT)
+        'PUT', 'POST' => $controller->update($id),
+        'DELETE' => $controller->destroy($id),
+        default => methodNotAllowed(),
+    };
+    exit;
+}
+
+// ---------- Comptes ----------
+if (preg_match('#^/accounts/register$#', $path)) {
+    $method === 'POST' ? (new AccountController())->register() : methodNotAllowed();
+    exit;
+}
+
+if (preg_match('#^/accounts/login$#', $path)) {
+    $method === 'POST' ? (new AccountController())->login() : methodNotAllowed();
     exit;
 }
 

@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Etudiant;
 
-class EtudiantController
+class EtudiantController extends Controller
 {
     private Etudiant $model;
 
@@ -73,13 +73,6 @@ class EtudiantController
         $this->json(['success' => true, 'message' => 'Étudiant supprimé']);
     }
 
-    private function getJsonBody(): array
-    {
-        $body = file_get_contents('php://input');
-        $data = json_decode($body, true);
-        return is_array($data) ? $data : [];
-    }
-
     private function validate(array $data): array
     {
         $errors = [];
@@ -100,11 +93,5 @@ class EtudiantController
         }
 
         return $errors;
-    }
-
-    private function json(array $payload, int $status = 200): void
-    {
-        http_response_code($status);
-        echo json_encode($payload, JSON_UNESCAPED_UNICODE);
     }
 }
