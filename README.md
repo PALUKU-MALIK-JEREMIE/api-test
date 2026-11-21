@@ -68,8 +68,8 @@ Pour les requêtes avec un body JSON, envoyer l'en-tête `Content-Type: applicat
 
 ```json
 {
-  "email": "test@exemple.com",
-  "password": "secret123"
+  "email": "jmp@test.com",
+  "password": "jmp121299"
 }
 ```
 
@@ -82,7 +82,7 @@ Réponse `201` :
 {
   "success": true,
   "message": "Compte créé",
-  "data": { "id": 1, "email": "test@exemple.com", "created_at": "2026-11-20 20:00:31" }
+  "data": { "id": 1, "email": "jmp@test.com", "created_at": "2026-11-20 20:00:31" }
 }
 ```
 
