@@ -94,8 +94,8 @@ Erreurs : `409` si l'email existe déjà, `422` si les données sont invalides.
 
 ```json
 {
-  "email": "test@exemple.com",
-  "password": "secret123"
+  "email": "jmp@test.com",
+  "password": "jmp121299"
 }
 ```
 
@@ -105,7 +105,7 @@ Réponse `200` :
 {
   "success": true,
   "message": "Connexion réussie",
-  "data": { "id": 1, "email": "test@exemple.com", "created_at": "2026-11-20 20:00:31" }
+  "data": { "id": 1, "email": "jmp@test.com", "created_at": "2026-11-20 20:00:31" }
 }
 ```
 
@@ -217,35 +217,6 @@ Le `PUT` ne peut pas recevoir de fichier, car PHP ne lit pas les fichiers envoy�
 
 ---
 
-## Étudiants
-
-| Méthode | Endpoint | Description |
-|---------|----------|-------------|
-| GET | `/etudiants` | Lister les étudiants |
-| GET | `/etudiants/{id}` | Afficher un étudiant |
-| POST | `/etudiants` | Créer un étudiant |
-| PUT | `/etudiants/{id}` | Modifier un étudiant |
-| DELETE | `/etudiants/{id}` | Supprimer un étudiant |
-
-Body JSON pour `POST` et `PUT` (tous les champs sont obligatoires) :
-
-```json
-{
-  "nom": "Kabila",
-  "postnom": "Mwamba",
-  "prenom": "Jean",
-  "adresse": "Kinshasa",
-  "telephone": "+243900000000"
-}
-```
-
-| Champ | Longueur max |
-|-------|--------------|
-| `nom`, `postnom`, `prenom` | 50 |
-| `adresse` | 100 |
-| `telephone` | 15 |
-
----
 
 ## Structure du projet
 
